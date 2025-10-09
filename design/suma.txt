@@ -1,0 +1,81 @@
+// modulo en crudo
+
+module suma (
+    input  logic [3:0]  dig1_1,
+    input  logic [3:0]  dig1_2,
+    input  logic [3:0]  dig1_3,
+    input  logic [3:0]  dig2_1,
+    input  logic [3:0]  dig2_2,
+    input  logic [3:0]  dig2_3,
+    
+    output logic [3:0]  digito1, 
+    output logic [3:0]  digito2, 
+    output logic [3:0]  digito3,
+    output logic [3:0]  digito4
+
+);
+
+
+ logic [4:0] sum_u;
+ logic [4:0] sum_d;
+ logic [4:0] sum_c;
+
+
+ logic  car1;
+ logic  car2;
+
+ always_comb begin
+    
+    sum_u = dig1_1 + dig2_1;
+
+    if (sum_u > 4'b1001) begin
+
+            sum_u = sum_u + 4'b0110;
+
+        end else begin
+
+            sum_u = sum_u;
+
+        end
+
+        digito1 = sum_u [3:0];
+        car1 = sum_u [4];
+
+    
+
+    sum_d = dig1_2 + dig2_2 + car1 ;
+
+    if (sum_d > 4'b1001) begin
+
+            sum_d = sum_d + 4'b0110;
+
+        end else begin
+
+            sum_d = sum_d;
+
+        end
+
+        digito2 = sum_d [3:0];
+        car2 = sum_d [4];
+
+
+    sum_c = dig1_3 + dig2_3 + car2 ;
+
+    if (sum_c > 4'b1001) begin
+
+            sum_c = sum_c + 4'b0110;
+
+        end else begin
+
+            sum_c = sum_c;
+
+        end
+
+        digito3 = sum_c [3:0];
+        digito4 = sum_c [4];
+
+    
+        
+ end
+    
+endmodule
