@@ -4,7 +4,7 @@ module suma (
     input  logic [3:0]  dig1_3, 
     input  logic [3:0]  dig2_1,
     input  logic [3:0]  dig2_2,
-    input  logic [3:0]  dig2_3,
+    input  logic [3:0]  dig2_3,     
 
     output logic [3:0]  digito1, // unidades
     output logic [3:0]  digito2, // decenas
