@@ -1,0 +1,441 @@
+Info: Series:GW1N-9C Device:GW1NR-9C Package:QFN88P Speed:C6/I5
+
+Info: Packing constants..
+Info: Packing Shadow RAM..
+Info: Packing GSR..
+Info: Packing IOs..
+Info: Packing diff IOs..
+Info: Packing IO logic..
+Info: Packing wide LUTs..
+Info: Packing LUT5s..
+Info: Packing LUT6s..
+Info: Packing LUT7s..
+Info: Packing LUT8s..
+Info: Packing ALUs..
+Info: Packing LUT-FFs..
+Info: Packing non-LUT FFs..
+Info: Packing PLLs..
+Info: Checksum: 0xb1a4b420
+
+Info: Annotating ports with timing budgets for target frequency 27.00 MHz
+Info: Checksum: 0xb1a4b420
+
+Info: Device utilisation:
+Info: 	                 VCC:     1/    1   100%
+Info: 	               SLICE:   678/ 8640     7%
+Info: 	                 IOB:    21/  274     7%
+Info: 	                ODDR:     0/  274     0%
+Info: 	           MUX2_LUT5:   156/ 4320     3%
+Info: 	           MUX2_LUT6:    64/ 2160     2%
+Info: 	           MUX2_LUT7:    18/ 1080     1%
+Info: 	           MUX2_LUT8:     4/ 1056     0%
+Info: 	                 GND:     1/    1   100%
+Info: 	                RAMW:     0/  270     0%
+Info: 	                 GSR:     1/    1   100%
+Info: 	                 OSC:     0/    1     0%
+Info: 	                rPLL:     0/    2     0%
+
+Info: Placed 20 cells based on constraints.
+Info: Creating initial analytic placement for 298 cells, random placement wirelen = 11692.
+Info:     at initial placer iter 0, wirelen = 837
+Info:     at initial placer iter 1, wirelen = 595
+Info:     at initial placer iter 2, wirelen = 593
+Info:     at initial placer iter 3, wirelen = 571
+Info: Running main analytical placer, max placement attempts per cell = 111392.
+Info:     at iteration #1, type SLICE: wirelen solved = 677, spread = 2472, legal = 2476; time = 0.00s
+Info:     at iteration #1, type MUX2_LUT6: wirelen solved = 2366, spread = 2420, legal = 2433; time = 0.00s
+Info:     at iteration #1, type MUX2_LUT7: wirelen solved = 2429, spread = 2470, legal = 2476; time = 0.00s
+Info:     at iteration #1, type MUX2_LUT8: wirelen solved = 2390, spread = 2395, legal = 2405; time = 0.00s
+Info:     at iteration #1, type MUX2_LUT5: wirelen solved = 2328, spread = 2331, legal = 2346; time = 0.00s
+Info:     at iteration #1, type VCC: wirelen solved = 2346, spread = 2346, legal = 2346; time = 0.00s
+Info:     at iteration #1, type GND: wirelen solved = 2346, spread = 2346, legal = 2346; time = 0.00s
+Info:     at iteration #1, type GSR: wirelen solved = 2346, spread = 2346, legal = 2346; time = 0.00s
+Info:     at iteration #1, type ALL: wirelen solved = 613, spread = 2452, legal = 2480; time = 0.02s
+Info:     at iteration #2, type SLICE: wirelen solved = 1106, spread = 2031, legal = 2126; time = 0.00s
+Info:     at iteration #2, type MUX2_LUT6: wirelen solved = 1963, spread = 2000, legal = 2023; time = 0.00s
+Info:     at iteration #2, type MUX2_LUT7: wirelen solved = 1950, spread = 1985, legal = 1985; time = 0.01s
+Info:     at iteration #2, type MUX2_LUT8: wirelen solved = 1929, spread = 1930, legal = 1950; time = 0.00s
+Info:     at iteration #2, type MUX2_LUT5: wirelen solved = 1869, spread = 1870, legal = 1869; time = 0.00s
+Info:     at iteration #2, type VCC: wirelen solved = 1869, spread = 1869, legal = 1869; time = 0.00s
+Info:     at iteration #2, type GND: wirelen solved = 1869, spread = 1869, legal = 1869; time = 0.00s
+Info:     at iteration #2, type GSR: wirelen solved = 1869, spread = 1869, legal = 1869; time = 0.00s
+Info:     at iteration #2, type ALL: wirelen solved = 640, spread = 1900, legal = 2007; time = 0.02s
+Info:     at iteration #3, type SLICE: wirelen solved = 1139, spread = 1994, legal = 2083; time = 0.00s
+Info:     at iteration #3, type MUX2_LUT6: wirelen solved = 1952, spread = 1954, legal = 1972; time = 0.00s
+Info:     at iteration #3, type MUX2_LUT7: wirelen solved = 1902, spread = 1934, legal = 1945; time = 0.02s
+Info:     at iteration #3, type MUX2_LUT8: wirelen solved = 1881, spread = 1890, legal = 1913; time = 0.00s
+Info:     at iteration #3, type MUX2_LUT5: wirelen solved = 1705, spread = 1709, legal = 1728; time = 0.00s
+Info:     at iteration #3, type VCC: wirelen solved = 1728, spread = 1728, legal = 1728; time = 0.00s
+Info:     at iteration #3, type GND: wirelen solved = 1728, spread = 1728, legal = 1728; time = 0.00s
+Info:     at iteration #3, type GSR: wirelen solved = 1728, spread = 1728, legal = 1728; time = 0.00s
+Info:     at iteration #3, type ALL: wirelen solved = 659, spread = 1913, legal = 1980; time = 0.02s
+Info:     at iteration #4, type SLICE: wirelen solved = 1094, spread = 1756, legal = 1849; time = 0.00s
+Info:     at iteration #4, type MUX2_LUT6: wirelen solved = 1811, spread = 1826, legal = 1844; time = 0.00s
+Info:     at iteration #4, type MUX2_LUT7: wirelen solved = 1784, spread = 1818, legal = 1826; time = 0.00s
+Info:     at iteration #4, type MUX2_LUT8: wirelen solved = 1774, spread = 1778, legal = 1796; time = 0.00s
+Info:     at iteration #4, type MUX2_LUT5: wirelen solved = 1662, spread = 1671, legal = 1688; time = 0.02s
+Info:     at iteration #4, type VCC: wirelen solved = 1688, spread = 1688, legal = 1688; time = 0.00s
+Info:     at iteration #4, type GND: wirelen solved = 1688, spread = 1688, legal = 1688; time = 0.00s
+Info:     at iteration #4, type GSR: wirelen solved = 1688, spread = 1688, legal = 1688; time = 0.00s
+Info:     at iteration #4, type ALL: wirelen solved = 660, spread = 1801, legal = 1870; time = 0.02s
+Info:     at iteration #5, type SLICE: wirelen solved = 1083, spread = 1695, legal = 1811; time = 0.00s
+Info:     at iteration #5, type MUX2_LUT6: wirelen solved = 1798, spread = 1801, legal = 1815; time = 0.00s
+Info:     at iteration #5, type MUX2_LUT7: wirelen solved = 1772, spread = 1808, legal = 1822; time = 0.00s
+Info:     at iteration #5, type MUX2_LUT8: wirelen solved = 1771, spread = 1773, legal = 1804; time = 0.00s
+Info:     at iteration #5, type MUX2_LUT5: wirelen solved = 1707, spread = 1707, legal = 1728; time = 0.02s
+Info:     at iteration #5, type VCC: wirelen solved = 1728, spread = 1728, legal = 1728; time = 0.00s
+Info:     at iteration #5, type GND: wirelen solved = 1728, spread = 1728, legal = 1728; time = 0.00s
+Info:     at iteration #5, type GSR: wirelen solved = 1728, spread = 1728, legal = 1728; time = 0.00s
+Info:     at iteration #5, type ALL: wirelen solved = 699, spread = 1850, legal = 1939; time = 0.00s
+Info:     at iteration #6, type SLICE: wirelen solved = 1091, spread = 1703, legal = 1891; time = 0.02s
+Info:     at iteration #6, type MUX2_LUT6: wirelen solved = 1863, spread = 1876, legal = 1900; time = 0.00s
+Info:     at iteration #6, type MUX2_LUT7: wirelen solved = 1861, spread = 1895, legal = 1899; time = 0.00s
+Info:     at iteration #6, type MUX2_LUT8: wirelen solved = 1857, spread = 1858, legal = 1885; time = 0.00s
+Info:     at iteration #6, type MUX2_LUT5: wirelen solved = 1872, spread = 1879, legal = 1889; time = 0.00s
+Info:     at iteration #6, type VCC: wirelen solved = 1889, spread = 1889, legal = 1889; time = 0.00s
+Info:     at iteration #6, type GND: wirelen solved = 1889, spread = 1889, legal = 1889; time = 0.02s
+Info:     at iteration #6, type GSR: wirelen solved = 1889, spread = 1889, legal = 1889; time = 0.00s
+Info:     at iteration #6, type ALL: wirelen solved = 738, spread = 1771, legal = 1875; time = 0.00s
+Info:     at iteration #7, type SLICE: wirelen solved = 1170, spread = 2024, legal = 2135; time = 0.02s
+Info:     at iteration #7, type MUX2_LUT6: wirelen solved = 2119, spread = 2119, legal = 2136; time = 0.00s
+Info:     at iteration #7, type MUX2_LUT7: wirelen solved = 2096, spread = 2115, legal = 2115; time = 0.00s
+Info:     at iteration #7, type MUX2_LUT8: wirelen solved = 2022, spread = 2037, legal = 2065; time = 0.00s
+Info:     at iteration #7, type MUX2_LUT5: wirelen solved = 2000, spread = 2000, legal = 2004; time = 0.00s
+Info:     at iteration #7, type VCC: wirelen solved = 2004, spread = 2004, legal = 2004; time = 0.00s
+Info:     at iteration #7, type GND: wirelen solved = 2004, spread = 2004, legal = 2004; time = 0.00s
+Info:     at iteration #7, type GSR: wirelen solved = 2004, spread = 2004, legal = 2004; time = 0.00s
+Info:     at iteration #7, type ALL: wirelen solved = 818, spread = 1640, legal = 1770; time = 0.01s
+Info:     at iteration #8, type SLICE: wirelen solved = 1099, spread = 1741, legal = 1870; time = 0.01s
+Info:     at iteration #8, type MUX2_LUT6: wirelen solved = 1830, spread = 1834, legal = 1852; time = 0.00s
+Info:     at iteration #8, type MUX2_LUT7: wirelen solved = 1819, spread = 1845, legal = 1845; time = 0.00s
+Info:     at iteration #8, type MUX2_LUT8: wirelen solved = 1810, spread = 1812, legal = 1830; time = 0.00s
+Info:     at iteration #8, type MUX2_LUT5: wirelen solved = 1785, spread = 1789, legal = 1805; time = 0.00s
+Info:     at iteration #8, type VCC: wirelen solved = 1805, spread = 1805, legal = 1805; time = 0.00s
+Info:     at iteration #8, type GND: wirelen solved = 1805, spread = 1805, legal = 1805; time = 0.00s
+Info:     at iteration #8, type GSR: wirelen solved = 1805, spread = 1805, legal = 1805; time = 0.02s
+Info:     at iteration #8, type ALL: wirelen solved = 824, spread = 1696, legal = 1755; time = 0.00s
+Info:     at iteration #9, type SLICE: wirelen solved = 1161, spread = 1727, legal = 1914; time = 0.00s
+Info:     at iteration #9, type MUX2_LUT6: wirelen solved = 1882, spread = 1955, legal = 1971; time = 0.02s
+Info:     at iteration #9, type MUX2_LUT7: wirelen solved = 1939, spread = 1965, legal = 1972; time = 0.00s
+Info:     at iteration #9, type MUX2_LUT8: wirelen solved = 1934, spread = 1941, legal = 1951; time = 0.00s
+Info:     at iteration #9, type MUX2_LUT5: wirelen solved = 1911, spread = 1915, legal = 1932; time = 0.00s
+Info:     at iteration #9, type VCC: wirelen solved = 1932, spread = 1932, legal = 1932; time = 0.00s
+Info:     at iteration #9, type GND: wirelen solved = 1932, spread = 1932, legal = 1932; time = 0.00s
+Info:     at iteration #9, type GSR: wirelen solved = 1932, spread = 1932, legal = 1932; time = 0.00s
+Info:     at iteration #9, type ALL: wirelen solved = 853, spread = 1766, legal = 1858; time = 0.02s
+Info:     at iteration #10, type SLICE: wirelen solved = 1174, spread = 1791, legal = 1947; time = 0.00s
+Info:     at iteration #10, type MUX2_LUT6: wirelen solved = 1915, spread = 1921, legal = 1970; time = 0.00s
+Info:     at iteration #10, type MUX2_LUT7: wirelen solved = 1949, spread = 1968, legal = 1982; time = 0.00s
+Info:     at iteration #10, type MUX2_LUT8: wirelen solved = 1936, spread = 1940, legal = 1962; time = 0.02s
+Info:     at iteration #10, type MUX2_LUT5: wirelen solved = 1878, spread = 1878, legal = 1894; time = 0.00s
+Info:     at iteration #10, type VCC: wirelen solved = 1894, spread = 1894, legal = 1894; time = 0.00s
+Info:     at iteration #10, type GND: wirelen solved = 1894, spread = 1894, legal = 1894; time = 0.00s
+Info:     at iteration #10, type GSR: wirelen solved = 1894, spread = 1894, legal = 1894; time = 0.00s
+Info:     at iteration #10, type ALL: wirelen solved = 897, spread = 1827, legal = 1927; time = 0.01s
+Info:     at iteration #11, type SLICE: wirelen solved = 1201, spread = 1755, legal = 1886; time = 0.00s
+Info:     at iteration #11, type MUX2_LUT6: wirelen solved = 1817, spread = 1873, legal = 1908; time = 0.00s
+Info:     at iteration #11, type MUX2_LUT7: wirelen solved = 1892, spread = 1915, legal = 1919; time = 0.02s
+Info:     at iteration #11, type MUX2_LUT8: wirelen solved = 1869, spread = 1871, legal = 1902; time = 0.00s
+Info:     at iteration #11, type MUX2_LUT5: wirelen solved = 1811, spread = 1841, legal = 1858; time = 0.00s
+Info:     at iteration #11, type VCC: wirelen solved = 1858, spread = 1858, legal = 1858; time = 0.00s
+Info:     at iteration #11, type GND: wirelen solved = 1858, spread = 1858, legal = 1858; time = 0.00s
+Info:     at iteration #11, type GSR: wirelen solved = 1858, spread = 1858, legal = 1858; time = 0.00s
+Info:     at iteration #11, type ALL: wirelen solved = 935, spread = 1815, legal = 1909; time = 0.00s
+Info:     at iteration #12, type SLICE: wirelen solved = 1250, spread = 1745, legal = 1812; time = 0.02s
+Info:     at iteration #12, type MUX2_LUT6: wirelen solved = 1789, spread = 1791, legal = 1809; time = 0.00s
+Info:     at iteration #12, type MUX2_LUT7: wirelen solved = 1752, spread = 1779, legal = 1795; time = 0.00s
+Info:     at iteration #12, type MUX2_LUT8: wirelen solved = 1784, spread = 1788, legal = 1797; time = 0.00s
+Info:     at iteration #12, type MUX2_LUT5: wirelen solved = 1690, spread = 1716, legal = 1726; time = 0.00s
+Info:     at iteration #12, type VCC: wirelen solved = 1726, spread = 1726, legal = 1726; time = 0.00s
+Info:     at iteration #12, type GND: wirelen solved = 1726, spread = 1726, legal = 1726; time = 0.02s
+Info:     at iteration #12, type GSR: wirelen solved = 1726, spread = 1726, legal = 1726; time = 0.00s
+Info:     at iteration #12, type ALL: wirelen solved = 965, spread = 1768, legal = 1842; time = 0.01s
+Info:     at iteration #13, type SLICE: wirelen solved = 1205, spread = 1759, legal = 1899; time = 0.01s
+Info:     at iteration #13, type MUX2_LUT6: wirelen solved = 1894, spread = 1925, legal = 1946; time = 0.00s
+Info:     at iteration #13, type MUX2_LUT7: wirelen solved = 1899, spread = 1966, legal = 1974; time = 0.00s
+Info:     at iteration #13, type MUX2_LUT8: wirelen solved = 1957, spread = 1958, legal = 1962; time = 0.00s
+Info:     at iteration #13, type MUX2_LUT5: wirelen solved = 1906, spread = 1905, legal = 1902; time = 0.00s
+Info:     at iteration #13, type VCC: wirelen solved = 1902, spread = 1902, legal = 1902; time = 0.00s
+Info:     at iteration #13, type GND: wirelen solved = 1902, spread = 1902, legal = 1902; time = 0.00s
+Info:     at iteration #13, type GSR: wirelen solved = 1902, spread = 1902, legal = 1902; time = 0.00s
+Info:     at iteration #13, type ALL: wirelen solved = 1002, spread = 1759, legal = 1834; time = 0.01s
+Info: HeAP Placer Time: 0.40s
+Info:   of which solving equations: 0.28s
+Info:   of which spreading cells: 0.03s
+Info:   of which strict legalisation: 0.02s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 120, wirelen = 1755
+Info:   at iteration #5: temp = 0.000000, timing cost = 136, wirelen = 1398
+Info:   at iteration #10: temp = 0.000000, timing cost = 143, wirelen = 1280
+Info:   at iteration #15: temp = 0.000000, timing cost = 112, wirelen = 1256
+Info:   at iteration #20: temp = 0.000000, timing cost = 96, wirelen = 1217
+Info:   at iteration #20: temp = 0.000000, timing cost = 91, wirelen = 1218 
+Info: SA placement time 0.44s
+
+Info: Max frequency for clock 'controlador_de_pantalla.clk': 113.95 MHz (PASS at 27.00 MHz)
+
+Info: Max delay <async>                             -> <async>                            : 19.20 ns
+Info: Max delay <async>                             -> posedge controlador_de_pantalla.clk: 20.11 ns
+Info: Max delay posedge controlador_de_pantalla.clk -> <async>                            : 22.82 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 2 endpoint(s)
+Info:          + represents [1,2) endpoint(s)
+Info: [ 14220,  15318) |*+
+Info: [ 15318,  16416) |*+
+Info: [ 16416,  17514) |***+
+Info: [ 17514,  18612) |**************+
+Info: [ 18612,  19710) |**************+
+Info: [ 19710,  20808) |**************************+
+Info: [ 20808,  21906) |******************************+
+Info: [ 21906,  23004) |*********************+
+Info: [ 23004,  24102) |***********+
+Info: [ 24102,  25200) |*********+
+Info: [ 25200,  26298) |******+
+Info: [ 26298,  27396) |*****+
+Info: [ 27396,  28494) |**********+
+Info: [ 28494,  29592) |****************************** 
+Info: [ 29592,  30690) |***********************+
+Info: [ 30690,  31788) |*************************+
+Info: [ 31788,  32886) |*******************************************************+
+Info: [ 32886,  33984) |*****************************************+
+Info: [ 33984,  35082) |*********************************+
+Info: [ 35082,  36180) |************************************************************ 
+Info: Checksum: 0x1543cbb8
+Info: Find global nets...
+Info: Routing globals...
+Info:   Route net controlador_de_pantalla.clk, use clock #0.
+Info:   Net controlador_de_pantalla.clk is routed.
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 2161 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:       1000 |       35        964 |   35   964 |      1208|       2.06       2.06|
+Info:       2000 |      108       1891 |   73   927 |       314|       3.29       5.35|
+Info:       2354 |      138       2216 |   30   325 |         0|       0.90       6.25|
+Info: Routing complete.
+Info: Router1 time 6.25s
+Info: Checksum: 0x20dd843a
+
+Info: Critical path report for clock 'controlador_de_pantalla.clk' (posedge -> posedge):
+Info: curr total
+Info:  0.5  0.5  Source teclado.contador_scan_DFFC_Q_12_DFFLC.Q
+Info:  0.9  1.3    Net teclado.contador_scan[4] budget 36.579037 ns (18,7) -> (19,6)
+Info:                Sink teclado.contador_scan_LUT4_I0_2_LC.C
+Info:                Defined in:
+Info:                  ../design/top.sv:27.23-38.6
+Info:                  ../design/teclado.sv:20.18-20.31
+Info:  0.8  2.2  Source teclado.contador_scan_LUT4_I0_2_LC.F
+Info:  0.3  2.5    Net teclado.contador_scan_LUT4_I0_2_F budget 8.737509 ns (19,6) -> (19,6)
+Info:                Sink teclado.contador_scan_MUX2_LUT5_S0_1_LC.I0
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:158.41-158.66
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:151.9-151.11
+Info:  0.2  2.7  Source teclado.contador_scan_MUX2_LUT5_S0_1_LC.OF
+Info:  0.3  3.0    Net teclado.contador_scan_MUX2_LUT5_S0_1_O budget 8.737509 ns (19,6) -> (19,6)
+Info:                Sink teclado.contador_scan_MUX2_LUT6_S0_LC.I0
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:157.9-157.11
+Info:  0.4  3.4  Source teclado.contador_scan_MUX2_LUT6_S0_LC.OF
+Info:  0.4  3.8    Net teclado.contador_scan_DFFC_Q_10_D_MUX2_LUT6_O_S0[2] budget 8.737509 ns (19,6) -> (18,6)
+Info:                Sink teclado.contador_scan_DFFC_Q_11_D_MUX2_LUT6_O_I1_MUX2_LUT5_O_I1_LUT4_F_LC.C
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:130.20-130.21
+Info:  0.8  4.6  Source teclado.contador_scan_DFFC_Q_11_D_MUX2_LUT6_O_I1_MUX2_LUT5_O_I1_LUT4_F_LC.F
+Info:  0.3  4.9    Net teclado.contador_scan_DFFC_Q_11_D_MUX2_LUT6_O_I1_MUX2_LUT5_O_I1 budget 4.799577 ns (18,6) -> (18,6)
+Info:                Sink teclado.contador_scan_DFFC_Q_11_D_MUX2_LUT6_O_I1_MUX2_LUT5_O_LC.I1
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:159.41-159.66
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:151.13-151.15
+Info:  0.2  5.1  Source teclado.contador_scan_DFFC_Q_11_D_MUX2_LUT6_O_I1_MUX2_LUT5_O_LC.OF
+Info:  0.3  5.4    Net teclado.contador_scan_DFFC_Q_11_D_MUX2_LUT6_O_I1 budget 4.799577 ns (18,6) -> (18,6)
+Info:                Sink teclado.contador_scan_DFFC_Q_11_D_MUX2_LUT6_O_LC.I1
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:157.13-157.15
+Info:  0.4  5.8  Source teclado.contador_scan_DFFC_Q_11_D_MUX2_LUT6_O_LC.OF
+Info:  1.8  7.6    Net teclado.contador_scan_DFFC_Q_11_D budget 4.799577 ns (18,6) -> (18,6)
+Info:                Sink teclado.contador_scan_DFFC_Q_11_DFFLC.A
+Info:                Defined in:
+Info:                  ../design/top.sv:27.23-38.6
+Info:                  ../design/teclado.sv:39.5-51.8
+Info:  0.0  7.6  Setup teclado.contador_scan_DFFC_Q_11_DFFLC.A
+Info: 3.2 ns logic, 4.5 ns routing
+
+Info: Critical path report for cross-domain path '<async>' -> '<async>':
+Info: curr total
+Info:  0.0  0.0  Source teclado.columnas_IBUF_O$iob.O
+Info:  8.5  8.5    Net teclado.columnas[3] budget 37.037037 ns (22,28) -> (7,11)
+Info:                Sink teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_I1_MUX2_LUT5_O_I1_LUT4_F_LC.C
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:130.20-130.21
+Info:  0.8  9.3  Source teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_I1_MUX2_LUT5_O_I1_LUT4_F_LC.F
+Info:  0.3  9.6    Net teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_I1_MUX2_LUT5_O_I1 budget 6.975408 ns (7,11) -> (7,11)
+Info:                Sink teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_I1_MUX2_LUT5_O_LC.I1
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:165.42-165.67
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:159.41-159.66
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:151.13-151.15
+Info:  0.2  9.8  Source teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_I1_MUX2_LUT5_O_LC.OF
+Info:  0.3 10.1    Net teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_I1 budget 6.975408 ns (7,11) -> (7,11)
+Info:                Sink teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_LC.I1
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:165.42-165.67
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:157.13-157.15
+Info:  0.4 10.5  Source teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_LC.OF
+Info:  0.3 10.8    Net teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1 budget 6.975408 ns (7,11) -> (7,11)
+Info:                Sink teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_LC.I1
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:163.13-163.15
+Info:  0.5 11.3  Source teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_LC.OF
+Info:  1.4 12.8    Net teclado.tecla_anterior_LUT2_I0_F[3] budget 6.975408 ns (7,11) -> (8,8)
+Info:                Sink teclado.reg_dig2_3_DFFCE_Q_1_D_LUT2_F_LC.A
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:130.20-130.21
+Info:  0.0 12.8  Setup teclado.reg_dig2_3_DFFCE_Q_1_D_LUT2_F_LC.A
+Info: 1.9 ns logic, 10.9 ns routing
+
+Info: Critical path report for cross-domain path '<async>' -> 'posedge controlador_de_pantalla.clk':
+Info: curr total
+Info:  0.0  0.0  Source teclado.columnas_IBUF_O$iob.O
+Info:  8.5  8.5    Net teclado.columnas[3] budget 37.037037 ns (22,28) -> (7,11)
+Info:                Sink teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_I1_MUX2_LUT5_O_I1_LUT4_F_LC.C
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:130.20-130.21
+Info:  0.8  9.3  Source teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_I1_MUX2_LUT5_O_I1_LUT4_F_LC.F
+Info:  0.3  9.6    Net teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_I1_MUX2_LUT5_O_I1 budget 6.975408 ns (7,11) -> (7,11)
+Info:                Sink teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_I1_MUX2_LUT5_O_LC.I1
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:165.42-165.67
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:159.41-159.66
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:151.13-151.15
+Info:  0.2  9.8  Source teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_I1_MUX2_LUT5_O_LC.OF
+Info:  0.3 10.1    Net teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_I1 budget 6.975408 ns (7,11) -> (7,11)
+Info:                Sink teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_LC.I1
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:165.42-165.67
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:157.13-157.15
+Info:  0.4 10.5  Source teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1_MUX2_LUT6_O_LC.OF
+Info:  0.3 10.8    Net teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_I1 budget 6.975408 ns (7,11) -> (7,11)
+Info:                Sink teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_LC.I1
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:163.13-163.15
+Info:  0.5 11.3  Source teclado.tecla_anterior_LUT2_I0_F_MUX2_LUT7_O_LC.OF
+Info:  1.4 12.8    Net teclado.tecla_anterior_LUT2_I0_F[3] budget 6.975408 ns (7,11) -> (8,8)
+Info:                Sink teclado.reg_dig2_3_DFFCE_Q_1_D_LUT2_F_LC.A
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:130.20-130.21
+Info:  1.0 13.8  Source teclado.reg_dig2_3_DFFCE_Q_1_D_LUT2_F_LC.F
+Info:  0.4 14.2    Net teclado.reg_dig2_3_DFFCE_Q_1_D budget 5.641006 ns (8,8) -> (7,8)
+Info:                Sink teclado.reg_dig1_1_DFFCE_Q_1_DFFLC.A
+Info:  0.0 14.2  Setup teclado.reg_dig1_1_DFFCE_Q_1_DFFLC.A
+Info: 2.9 ns logic, 11.3 ns routing
+
+Info: Critical path report for cross-domain path 'posedge controlador_de_pantalla.clk' -> '<async>':
+Info: curr total
+Info:  0.5  0.5  Source teclado.reg_dig2_1_DFFCE_Q_2_DFFLC.Q
+Info:  1.4  1.8    Net dig2_1[1] budget 36.579037 ns (5,12) -> (6,8)
+Info:                Sink sumador.sum_u_ALU_SUM_COUT_ALU_COUT_2_ALULC.A
+Info:                Defined in:
+Info:                  ../design/top.sv:27.23-38.6
+Info:                  ../design/teclado.sv:34.18-34.28
+Info:  1.0  2.9  Source sumador.sum_u_ALU_SUM_COUT_ALU_COUT_2_ALULC.F
+Info:  1.4  4.2    Net sumador.car1_LUT3_F_I1[0] budget 17.740519 ns (6,8) -> (5,6)
+Info:                Sink sumador.sum_u_ALU_SUM_COUT_ALU_COUT_2_SUM_ALU_SUM_1_ALULC.B
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:130.20-130.21
+Info:  1.1  5.3  Source sumador.sum_u_ALU_SUM_COUT_ALU_COUT_2_SUM_ALU_SUM_1_ALULC.F
+Info:  0.9  6.2    Net sumador.car1_LUT3_F_I0[0] budget 11.461013 ns (5,6) -> (7,6)
+Info:                Sink sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT8_O_I0_MUX2_LUT7_O_I0_MUX2_LUT6_O_I0_MUX2_LUT5_O_I1_LUT1_F_LC.A
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:130.20-130.21
+Info:  1.0  7.2  Source sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT8_O_I0_MUX2_LUT7_O_I0_MUX2_LUT6_O_I0_MUX2_LUT5_O_I1_LUT1_F_LC.F
+Info:  0.3  7.6    Net sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT8_O_I0_MUX2_LUT7_O_I0_MUX2_LUT6_O_I0_MUX2_LUT5_O_I1 budget 3.947755 ns (7,6) -> (7,6)
+Info:                Sink sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT8_O_I0_MUX2_LUT7_O_I0_MUX2_LUT6_O_I0_MUX2_LUT5_O_LC.I1
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:170.42-170.67
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:164.41-164.66
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:158.41-158.66
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:151.13-151.15
+Info:  0.2  7.8  Source sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT8_O_I0_MUX2_LUT7_O_I0_MUX2_LUT6_O_I0_MUX2_LUT5_O_LC.OF
+Info:  0.3  8.1    Net sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT8_O_I0_MUX2_LUT7_O_I0_MUX2_LUT6_O_I0 budget 3.947755 ns (7,6) -> (7,6)
+Info:                Sink sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT8_O_I0_MUX2_LUT7_O_I0_MUX2_LUT6_O_LC.I0
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:170.42-170.67
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:164.41-164.66
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:157.9-157.11
+Info:  0.4  8.4  Source sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT8_O_I0_MUX2_LUT7_O_I0_MUX2_LUT6_O_LC.OF
+Info:  0.3  8.8    Net sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT8_O_I0_MUX2_LUT7_O_I0 budget 3.947755 ns (7,6) -> (7,6)
+Info:                Sink sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT8_O_I0_MUX2_LUT7_O_LC.I0
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:170.42-170.67
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:163.9-163.11
+Info:  0.5  9.3  Source sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT8_O_I0_MUX2_LUT7_O_LC.OF
+Info:  0.4  9.7    Net sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT8_O_I0 budget 3.947755 ns (7,6) -> (6,6)
+Info:                Sink sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT8_O_LC.I0
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:169.9-169.11
+Info:  0.7 10.4  Source sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT8_O_LC.OF
+Info:  2.7 13.1    Net sumador.sum_m_ALU_SUM_COUT_ALU_COUT_1_SUM_LUT4_I0_F_MUX2_LUT5_I1_O[6] budget 3.947755 ns (6,6) -> (9,1)
+Info:                Sink decodificador.segments_MUX2_LUT7_O_5_I0_MUX2_LUT6_O_I1_MUX2_LUT5_O_I1_LUT2_F_LC.B
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:130.20-130.21
+Info:  1.1 14.2  Source decodificador.segments_MUX2_LUT7_O_5_I0_MUX2_LUT6_O_I1_MUX2_LUT5_O_I1_LUT2_F_LC.F
+Info:  0.3 14.6    Net decodificador.segments_MUX2_LUT7_O_5_I0_MUX2_LUT6_O_I1_MUX2_LUT5_O_I1 budget 2.451837 ns (9,1) -> (9,1)
+Info:                Sink decodificador.segments_MUX2_LUT7_O_5_I0_MUX2_LUT6_O_I1_MUX2_LUT5_O_LC.I1
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:164.41-164.66
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:159.41-159.66
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:151.13-151.15
+Info:  0.2 14.7  Source decodificador.segments_MUX2_LUT7_O_5_I0_MUX2_LUT6_O_I1_MUX2_LUT5_O_LC.OF
+Info:  0.3 15.1    Net decodificador.segments_MUX2_LUT7_O_5_I0_MUX2_LUT6_O_I1 budget 2.451836 ns (9,1) -> (9,1)
+Info:                Sink decodificador.segments_MUX2_LUT7_O_5_I0_MUX2_LUT6_O_LC.I1
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:164.41-164.66
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:157.13-157.15
+Info:  0.4 15.4  Source decodificador.segments_MUX2_LUT7_O_5_I0_MUX2_LUT6_O_LC.OF
+Info:  0.3 15.7    Net decodificador.segments_MUX2_LUT7_O_5_I0 budget 2.451836 ns (9,1) -> (9,1)
+Info:                Sink decodificador.segments_MUX2_LUT7_O_5_LC.I0
+Info:                Defined in:
+Info:                  D:\d-logico\oss-cad-suite\bin\../share/yosys/gowin/cells_map.v:163.9-163.11
+Info:  0.5 16.3  Source decodificador.segments_MUX2_LUT7_O_5_LC.OF
+Info:  0.9 17.2    Net decodificador.segments[1] budget 2.451836 ns (9,1) -> (10,0)
+Info:                Sink segments_OBUF_O_5$iob.I
+Info:                Defined in:
+Info:                  ../design/top.sv:67.12-70.6
+Info:                  ../design/7segmentos.sv:8.17-8.29
+Info: 7.5 ns logic, 9.6 ns routing
+
+Info: Max frequency for clock 'controlador_de_pantalla.clk': 131.23 MHz (PASS at 27.00 MHz)
+
+Info: Max delay <async>                             -> <async>                            : 12.77 ns
+Info: Max delay <async>                             -> posedge controlador_de_pantalla.clk: 14.21 ns
+Info: Max delay posedge controlador_de_pantalla.clk -> <async>                            : 17.16 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 2 endpoint(s)
+Info:          + represents [1,2) endpoint(s)
+Info: [ 19878,  20714) |+
+Info: [ 20714,  21550) |*+
+Info: [ 21550,  22386) |+
+Info: [ 22386,  23222) |*+
+Info: [ 23222,  24058) |************+
+Info: [ 24058,  24894) |********+
+Info: [ 24894,  25730) |***************************+
+Info: [ 25730,  26566) |*******************************+
+Info: [ 26566,  27402) |*******************+
+Info: [ 27402,  28238) |**********+
+Info: [ 28238,  29074) |*******+
+Info: [ 29074,  29910) |*********+
+Info: [ 29910,  30746) |*******************************+
+Info: [ 30746,  31582) |********************+
+Info: [ 31582,  32418) |****************************+
+Info: [ 32418,  33254) |*********************************+
+Info: [ 33254,  34090) |************************************************************ 
+Info: [ 34090,  34926) |**********************+
+Info: [ 34926,  35762) |**************************************************+
+Info: [ 35762,  36598) |**********************************+
+
+Info: Program finished normally.

@@ -29,7 +29,8 @@ module sevseg(
         endcase
     end
 
-  assign segments = ~segments_reg; 
+  assign segments = segments_reg;
+
 
 endmodule
 

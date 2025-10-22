@@ -3,10 +3,10 @@ module multiplex_display #(
 )(
     input  logic        clk,
     input  logic        rst_n,
-    input  logic [3:0]  digit0,
-    input  logic [3:0]  digit1,
-    input  logic [3:0]  digit2,
-    input  logic [3:0]  digit3,
+    input  logic [3:0]  digito1,
+    input  logic [3:0]  digito2,
+    input  logic [3:0]  digito3,
+    input  logic [3:0]  digito4,
     output logic [3:0]  bcd_value,
     output logic [3:0]  segmento_activo
 );
@@ -30,23 +30,26 @@ module multiplex_display #(
     // ---- MUX DE VALOR BCD ----
     always_comb begin
         unique case (pantalla_activa)
-            2'd0: bcd_value = digit0;
-            2'd1: bcd_value = digit1;
-            2'd2: bcd_value = digit2;
-            2'd3: bcd_value = digit3;
+            2'd0: bcd_value = digito1;
+            2'd1: bcd_value = digito2;
+            2'd2: bcd_value = digito3;
+            2'd3: bcd_value = digito4;
             default: bcd_value = 4'd0;
         endcase
     end
 
     // ---- SELECCIÓN DE DISPLAY ACTIVO ----
     always_comb begin
-        unique case (pantalla_activa)
-            2'd0: segmento_activo = 4'b1110;  // Activa display 0
-            2'd1: segmento_activo = 4'b1101;  // Activa display 1
-            2'd2: segmento_activo = 4'b1011;  // Activa display 2
-            2'd3: segmento_activo = 4'b0111;  // Activa display 3
-            default: segmento_activo = 4'b1111;
-        endcase
-    end
+    unique case (pantalla_activa)
+        2'd0: segmento_activo = 4'b0001;
+        2'd1: segmento_activo = 4'b0010;
+        2'd2: segmento_activo = 4'b0100;
+        2'd3: segmento_activo = 4'b1000;
+        default: segmento_activo = 4'b0000;
+    endcase
+end
+
+
+
 
 endmodule

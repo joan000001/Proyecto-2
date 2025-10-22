@@ -1,0 +1,45 @@
+// base del teclado
+
+module teclado #(
+    
+)(
+    input  logic        clk,
+    input  logic        rst_n,
+    
+    input  logic [3:0]  columnas,
+    
+    output logic [3:0]  filas,
+
+    output  logic [3:0]  dig1_1, 
+    output  logic [3:0]  dig1_2, 
+    output  logic [3:0]  dig1_3, 
+
+    output  logic [3:0]  dig2_1,
+    output  logic [3:0]  dig2_2,
+    output  logic [3:0]  dig2_3,
+    
+    
+);
+
+    
+
+    // ciclo de reset
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        
+        
+
+    end 
+
+    // ciclo principal 
+
+    always_ff @(posedge clk or negedge rst_n) begin
+
+        
+    end  
+
+
+
+
+
+endmodule

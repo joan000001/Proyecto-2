@@ -1,0 +1,143 @@
+module teclado #(
+    parameter CLK_FREQ = 27_000_000  // puedes cambiarlo según tu reloj
+)(
+    input  logic        clk,
+    input  logic        rst_n,
+    
+    input  logic [3:0]  columnas,
+    output logic [3:0]  filas,
+
+    output logic [3:0]  dig1_1, 
+    output logic [3:0]  dig1_2, 
+    output logic [3:0]  dig1_3, 
+    output logic [3:0]  dig2_1,
+    output logic [3:0]  dig2_2,
+    output logic [3:0]  dig2_3
+);
+
+    // ----------------------------
+    // Definiciones internas
+    // ----------------------------
+    typedef enum logic [1:0] {Q0, Q1, Q2, Q3} estado_t;
+    estado_t estado = Q0;
+
+    logic [3:0] salidas;
+    logic [4:0] tecla;
+    logic [4:0] tecla_anterior;
+    logic [2:0] contador_digitos;
+    logic grupo; // 0 = primer grupo, 1 = segundo grupo
+
+    // ----------------------------
+    // Escaneo del teclado (matriz 4x4)
+    // ----------------------------
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n)
+            estado <= Q0;
+        else begin
+            case (estado)
+                Q0: estado <= Q1;
+                Q1: estado <= Q2;
+                Q2: estado <= Q3;
+                Q3: estado <= Q0;
+                default: estado <= Q0;
+            endcase
+        end
+    end
+
+    always_comb begin
+        case (estado)
+            Q0: salidas = 4'b0111;
+            Q1: salidas = 4'b1011;
+            Q2: salidas = 4'b1101;
+            Q3: salidas = 4'b1110;
+            default: salidas = 4'b1111;
+        endcase
+    end
+
+    assign filas = salidas;
+
+    // ----------------------------
+    // Decodificación de tecla
+    // ----------------------------
+    always_comb begin
+        unique case ({salidas, columnas})
+            8'b0111_1011: tecla = 5'd0;  // 0
+            8'b1110_0111: tecla = 5'd1;  // 1
+            8'b1110_1011: tecla = 5'd2;  // 2
+            8'b1110_1101: tecla = 5'd3;  // 3
+            8'b1101_0111: tecla = 5'd4;  // 4
+            8'b1101_1011: tecla = 5'd5;  // 5
+            8'b1101_1101: tecla = 5'd6;  // 6
+            8'b1011_0111: tecla = 5'd7;  // 7
+            8'b1011_1011: tecla = 5'd8;  // 8
+            8'b1011_1101: tecla = 5'd9;  // 9
+            8'b0111_1101: tecla = 5'd10; // A (=)
+            8'b1110_1110: tecla = 5'd11; // B (+)
+            8'b0111_0111: tecla = 5'd12; // C (C)
+            8'b1101_1110: tecla = 5'd13; // D (-)
+            8'b1011_1110: tecla = 5'd14; // E (·)
+            8'b0111_1110: tecla = 5'd15; // F (/)
+            default:       tecla = 5'd31; // sin tecla
+        endcase
+    end
+
+    // ----------------------------
+    // Captura de los 6 dígitos
+    // ----------------------------
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            dig1_1 <= 4'd0;
+            dig1_2 <= 4'd0;
+            dig1_3 <= 4'd0;
+            dig2_1 <= 4'd0;
+            dig2_2 <= 4'd0;
+            dig2_3 <= 4'd0;
+            contador_digitos <= 3'd0;
+            grupo <= 1'b0;
+            tecla_anterior <= 5'd31;
+        end else begin
+            // detectar flanco de nueva tecla (sin rebote)
+            if (tecla != tecla_anterior && tecla != 5'd31) begin
+                tecla_anterior <= tecla;
+
+                // si se presiona '+', cambiar grupo
+                if (tecla == 5'd11) begin
+                    grupo <= 1'b1;
+                    contador_digitos <= 3'd0;
+                end
+                // si se presiona '-', reiniciar todo
+                else if (tecla == 5'd13) begin
+                    dig1_1 <= 4'd0;
+                    dig1_2 <= 4'd0;
+                    dig1_3 <= 4'd0;
+                    dig2_1 <= 4'd0;
+                    dig2_2 <= 4'd0;
+                    dig2_3 <= 4'd0;
+                    contador_digitos <= 3'd0;
+                    grupo <= 1'b0;
+                end
+                // si es número
+                else if (tecla <= 5'd9) begin
+                    contador_digitos <= contador_digitos + 3'd1;
+                    if (!grupo) begin
+                        case (contador_digitos)
+                            3'd0: dig1_1 <= tecla[3:0];
+                            3'd1: dig1_2 <= tecla[3:0];
+                            3'd2: dig1_3 <= tecla[3:0];
+                        endcase
+                    end else begin
+                        case (contador_digitos)
+                            3'd0: dig2_1 <= tecla[3:0];
+                            3'd1: dig2_2 <= tecla[3:0];
+                            3'd2: dig2_3 <= tecla[3:0];
+                        endcase
+                    end
+                end
+            end
+            // si no hay tecla presionada, liberar
+            if (tecla == 5'd31)
+                tecla_anterior <= tecla;
+        end
+    end
+
+endmodule
