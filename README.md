@@ -177,6 +177,19 @@ El sistema sincrónico final integra cuatro subsistemas funcionales en una FPGA:
 3. **Despliegue en 7 segmentos**
 4.  **Decodificador del 7 segmentos**
 
+### 5.0 Descricion 
+El funcionamiento de este proyecto se basa en una máquina de estados finitos (FSM) que realiza el escaneo de un teclado matricial 4x4. La FSM activa secuencialmente cada una de las filas del teclado mientras espera una señal proveniente de las columnas, correspondiente a la tecla presionada.
+
+Una vez detectada la tecla, la información es enviada a un decodificador, el cual transforma los datos en dos números de tres dígitos. Estos valores se transfieren al sumador BCD, encargado de realizar la operación aritmética correspondiente.
+
+El resultado obtenido se envía a un multiplexor de siete segmentos, que se encarga de distribuir cada dígito hacia su respectivo display. Antes de llegar a los siete segmentos, los datos pasan por un decodificador adicional, cuya función es adaptar la información para que sea compatible con las salidas del sistema y pueda representarse correctamente en los displays.
+
+La descripción del circuito físico se basa en una conexión directa desde la FPGA hacia las filas del teclado matricial 4x4. Las columnas, por su parte, funcionan como entradas y se encuentran conectadas a través de resistencias pull-down, lo que garantiza niveles lógicos estables cuando no hay ninguna tecla presionada.
+
+Para el sistema de despliegue en los displays de siete segmentos, se utiliza un transistor NPN por cada dígito, configurado con una resistencia en la base y el emisor conectado a tierra. Estos transistores controlan la activación de cada uno de los cuatro dígitos del display de cátodo común.
+
+Finalmente, los segmentos de los displays se conectan a la FPGA mediante resistencias limitadoras de corriente, las cuales protegen tanto los LEDs como las salidas del dispositivo programable.
+
 
 La arquitectura general sigue un enfoque de **flujo de datos controlado** mediante máquinas de estados, garantizando sincronización total con el reloj  de **27 MHz**.
 
