@@ -862,7 +862,7 @@ endmodule
 
 ```
 
-### 5.4 Decodificaor del 7 segmentos
+### 5.4 Decodificador del 7 segmentos
 
 **Descripción:**
 Convierte los datos binarios a formato decimal BCD y los muestra en cuatro displays de 7 segmentos con cátodos comunes.
