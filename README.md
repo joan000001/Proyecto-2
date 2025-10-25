@@ -192,7 +192,7 @@ El teclado se analiza columna por columna usando un contador de anillo y detecci
   Permite registrar los dos números consecutivos antes de activar la suma.
 
   **Diseño**
-
+```systemverilog
 module teclado_matricial (
     input  logic        clk,
     input  logic        rst_n,
