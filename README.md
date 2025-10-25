@@ -513,7 +513,7 @@ endmodule
     end
 
 endmodule
-```
+```systemverilog
 
 [0] dig -> 000 | 000
 [3704000 ns] Reset desactivado - Sistema inicializado      
