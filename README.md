@@ -32,7 +32,9 @@ A lo largo del trabajo se realizaron tres ejercicios fundamentales:
 * Construcción de un **cerrojo SR** con compuertas NAND (74HC00).
 * Medición del **tiempo de establecimiento (setup time)** en un flip-flop tipo D (74LS74).
 
-Finalmente, se planteó el diseño de un sistema digital completo que captura, procesa y despliega datos numéricos usando una FPGA.
+Finalmente, mediante el uso de un teclado matricial 4x4, se implementó un sistema de captura de información capaz de recibir dígitos que eran procesados por una FPGA. Estos datos se mostraban posteriormente en un sistema de displays de siete segmentos, permitiendo visualizar los resultados de manera clara y ordenada.
+
+El propósito principal de este proyecto fue fortalecer el aprendizaje sobre el uso de máquinas de estados y comprender su funcionamiento en distintas aplicaciones digitales, integrando tanto la lógica de control como el manejo de periféricos de entrada y salida.
 
 ---
 
