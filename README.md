@@ -8,9 +8,19 @@
 **Profesor:** Dr.-Ing. Alfonso Chacón-Rodríguez
 **Asistentes:** Abner López-Méndez
 
+### 2. Referencias
+- [0] David Harris y Sarah Harris. *Digital Design and Computer Architecture. RISC-V Edition.* Morgan Kaufmann, 2022. ISBN: 978-0-12-820064-3
+
+- [1] M. M. Mano and M. D. Ciletti, Digital Design: With an Introduction to the Verilog HDL, VHDL, and SystemVerilog, 5th ed. Boston, MA, USA: Pearson, 2013.
+
+- [2] B. Razavi, Design of Analog CMOS Integrated Circuits, 2nd ed. New York, NY, USA: McGraw-Hill Education, 2016.
+
+### 3. Desarrollo
+ - Joan Franco Sandoval 
+
 ---
 
-## 1. Introducción
+## . Introducción
 
 El desarrollo de sistemas digitales modernos requiere la implementación de circuitos sincrónicos complejos que garanticen confiabilidad y precisión temporal. Las herramientas **EDA** y los lenguajes de descripción de hardware (**HDL**) permiten modelar y sintetizar dichos sistemas en plataformas reconfigurables como las **FPGAs**.
 
@@ -206,31 +216,250 @@ Las señales de entrada fueron registradas doblemente para evitar metastabilidad
 **Descripción:**
 Recibe los dos números capturados y realiza la suma sin signo de manera sincrónica.
 
-**Diseño HDL:**
+**Diseño**
 
 ```systemverilog
-always_ff @(posedge clk) begin
-    if (enable)
-        resultado <= numA + numB;
-end
+module suma (
+    input  logic [3:0]  dig1_1, 
+    input  logic [3:0]  dig1_2, 
+    input  logic [3:0]  dig1_3, 
+    input  logic [3:0]  dig2_1,
+    input  logic [3:0]  dig2_2,
+    input  logic [3:0]  dig2_3,     
+
+    output logic [3:0]  digito1, // unidades
+    output logic [3:0]  digito2, // decenas
+    output logic [3:0]  digito3, // centenas
+    output logic [3:0]  digito4  // millares 
+);
+
+    logic [4:0] sum_u;
+    logic [4:0] sum_d;
+    logic [4:0] sum_m;
+
+    logic car1;
+    logic car2;
+
+    always_comb begin
+        // --- Unidades ---
+        sum_u = dig1_1 + dig2_1;
+        if (sum_u > 5'b01001)
+            sum_u = sum_u + 5'b00110;
+        digito1 = sum_u[3:0];
+        car1    = sum_u[4];
+
+        // --- Decenas ---
+        sum_d = dig1_2 + dig2_2 + car1;
+        if (sum_d > 5'b01001)
+            sum_d = sum_d + 5'b00110;
+        digito2 = sum_d[3:0];
+        car2    = sum_d[4];
+
+
+
+        // --- Centenas ---
+        sum_m = dig1_3 + dig2_3 + car2;
+        if (sum_m > 5'b01001)
+            sum_m = sum_m + 5'b00110;
+        digito3 = sum_m[3:0];
+        digito4 = sum_m[4];
+    end
+
+endmodule
 ```
 
-**Diagrama:**
+**Test**
+```systemverilog
 
-```
- +--------------------------+
- |   Subsistema de suma     |
- |--------------------------|
- | Entradas: numA, numB     |
- | Salida: resultado[11:0]  |
- +--------------------------+
+    initial begin
+        $display("SUMA BCD ");
+        $display("   Numero1   +   Numero2   =   Resultado");
+       
+
+        // Caso 1: 123 + 456
+        dig1_3 = 4'd1; dig1_2 = 4'd2; dig1_1 = 4'd3;
+        dig2_3 = 4'd4; dig2_2 = 4'd6; dig2_1 = 4'd6;
+        #10;
+        $display("     %0d%0d%0d   +   %0d%0d%0d   =   %0d%0d%0d%0d",
+                 dig1_3, dig1_2, dig1_1,
+                 dig2_3, dig2_2, dig2_1,
+                 digito4, digito3, digito2, digito1);
+
+        // Caso 2: 999 + 1
+        dig1_3 = 4'd9; dig1_2 = 4'd9; dig1_1 = 4'd9;
+        dig2_3 = 4'd1; dig2_2 = 4'd1; dig2_1 = 4'd1;
+        #10;
+        $display("     %0d%0d%0d   +   %0d%0d%0d   =   %0d%0d%0d%0d",
+                 dig1_3, dig1_2, dig1_1,
+                 dig2_3, dig2_2, dig2_1,
+                 digito4, digito3, digito2, digito1);
+
+        // Caso 3: 567 + 678
+        dig1_3 = 4'd5; dig1_2 = 4'd6; dig1_1 = 4'd7;
+        dig2_3 = 4'd6; dig2_2 = 4'd7; dig2_1 = 4'd8;
+        #10;
+        $display("     %0d%0d%0d   +   %0d%0d%0d   =   %0d%0d%0d%0d",
+                 dig1_3, dig1_2, dig1_1,
+                 dig2_3, dig2_2, dig2_1,
+                 digito4, digito3, digito2, digito1);
+
+        // Caso 4: 250 + 250
+        dig1_3 = 4'd2; dig1_2 = 4'd8; dig1_1 = 4'd0;
+        dig2_3 = 4'd2; dig2_2 = 4'd5; dig2_1 = 4'd0;
+        #10;
+        $display("     %0d%0d%0d   +   %0d%0d%0d   =   %0d%0d%0d%0d",
+                 dig1_3, dig1_2, dig1_1,
+                 dig2_3, dig2_2, dig2_1,
+                 digito4, digito3, digito2, digito1);
+
+        // Caso 5: 400 + 700
+        dig1_3 = 4'd4; dig1_2 = 4'd0; dig1_1 = 4'd0;
+        dig2_3 = 4'd7; dig2_2 = 4'd0; dig2_1 = 4'd0;
+        #10;
+        $display("     %0d%0d%0d   +   %0d%0d%0d   =   %0d%0d%0d%0d",
+                 dig1_3, dig1_2, dig1_1,
+                 dig2_3, dig2_2, dig2_1,
+                 digito4, digito3, digito2, digito1);
+
+       
+        $finish;
+    end
+
+endmodule
 ```
 
-El resultado se almacena en un registro temporal antes de ser enviado al subsistema de despliegue.
+**resultado de la pruba**
+SUMA BCD 
+   Numero1   +   Numero2   =   Resultado
+     123   +   466   =   0589
+     999   +   111   =   1110
+     567   +   678   =   1245
+     280   +   250   =   0530
+     400   +   700   =   1100
 
 ---
 
 ### 5.3 Subsistema de despliegue en 7 segmentos
+
+**Descripción:**
+Recibe los dos números capturados y realiza la suma sin signo de manera sincrónica.
+
+**Diseño**
+
+```systemverilog
+module multiplex_display #(
+    parameter int contar = 1000
+)(
+    input  logic        clk,
+    input  logic        rst_n,
+    input  logic [3:0]  digito1,
+    input  logic [3:0]  digito2,
+    input  logic [3:0]  digito3,
+    input  logic [3:0]  digito4,
+    output logic [3:0]  bcd_value,
+    output logic [3:0]  segmento_activo
+);
+
+    logic [1:0] pantalla_activa;   // Solo 2 bits para 4 pantallas (0–3)
+    logic [16:0] contador;
+
+    // ---- CONTADOR Y SELECCIÓN DE DISPLAY ----
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            contador <= '0;
+            pantalla_activa <= 2'd0;
+        end else if (contador == contar) begin
+            contador <= '0;
+            pantalla_activa <= (pantalla_activa == 2'd3) ? 2'd0 : pantalla_activa + 1;
+        end else begin
+            contador <= contador + 1;
+        end
+    end
+
+    // ---- MUX DE VALOR BCD ----
+    always_comb begin
+        unique case (pantalla_activa)
+            2'd0: bcd_value = digito1;
+            2'd1: bcd_value = digito2;
+            2'd2: bcd_value = digito3;
+            2'd3: bcd_value = digito4;
+            default: bcd_value = 4'd0;
+        endcase
+    end
+
+    // ---- SELECCIÓN DE DISPLAY ACTIVO ----
+    always_comb begin
+    unique case (pantalla_activa)
+        2'd0: segmento_activo = 4'b0001;
+        2'd1: segmento_activo = 4'b0010;
+        2'd2: segmento_activo = 4'b0100;
+        2'd3: segmento_activo = 4'b1000;
+        default: segmento_activo = 4'b0000;
+    endcase
+end
+
+endmodule
+
+```
+
+**Etapas funcionales:**
+
+1. Conversión binario–BCD.
+2. Decodificación BCD–7 segmentos.
+3. Multiplexado y refresco secuencial de displays.
+
+**Test**
+```systemverilog
+          always #(CLK_PERIOD/2.0) clk = ~clk;
+
+          // Proceso inicial
+          initial begin
+              
+              $display("Tiempo(us)\tsegmento_activo\tbcd_value\tDígito activo");
+              clk = 0;
+              rst_n = 0;
+              digito1 = 4'd1;
+              digito2 = 4'd2;
+              digito3 = 4'd9;
+              digito4 = 4'd4;
+
+              #1000;    // Esperar 10 µs
+              rst_n = 1;
+
+              
+              repeat (9000) begin
+                  @(posedge clk);
+                  if (dut.contador == 0) begin
+                      string digito_activo;
+                      case (segmento_activo)
+                          4'b0001: digito_activo = "unidad";
+                          4'b0010: digito_activo = "decena";
+                          4'b0100: digito_activo = "centena";
+                          4'b1000: digito_activo = "millar";
+                          default: digito_activo = "N/A";
+                      endcase
+
+                      $display("%0t\t%b\t\t%d\t\t%s",
+                              $time, segmento_activo, bcd_value, digito_activo);
+     
+```
+
+**resultado de la pruba**
+Tiempo(us)      segmento_activo bcd_value       Digito activo
+1001000000000000        0001             1              unidad
+3003000000000000        0010             2              decena
+5005000000000000        0100             9              centena
+7007000000000000        1000             4              millar
+9009000000000000        0001             1              unidad
+11011000000000000       0010             2              decena
+13013000000000000       0100             9              centena
+15015000000000000       1000             4              millar
+17017000000000000       0001             1              unidad
+../sim/tech_tb.sv:62: $finish called at 18999000000000000 (1ps)
+
+---
+
+### 5.3 Decodificaor del 7 segmentos
 
 **Descripción:**
 Convierte los datos binarios a formato decimal BCD y los muestra en cuatro displays de 7 segmentos con cátodos comunes.
@@ -241,22 +470,29 @@ Convierte los datos binarios a formato decimal BCD y los muestra en cuatro displ
 2. Decodificación BCD–7 segmentos.
 3. Multiplexado y refresco secuencial de displays.
 
-**Diagrama:**
+**Test**
+```systemverilog
+   bcd_val = 4'hA; 
+        #1;
+        $display("sevseg: bcd=%h => seg=%b", bcd_val, seg_out);
+        bcd_val = 4'h0; 
+        #1;
+        $display("sevseg: bcd=%h => seg=%b", bcd_val, seg_out);
+        bcd_val = 4'h2; 
+        #1;
+        $display("sevseg: bcd=%h => seg=%b", bcd_val, seg_out);
+        bcd_val = 4'h9; 
+        #1;
+        $display("sevseg: bcd=%h => seg=%b", bcd_val, seg_out);
+        
+```
 
-```
-          +-----------------------+
-          | Decodificador BCD-7seg|
-          +-----------------------+
-                    |
-         +----------+----------+
-         |  MUX de refresco    |
-         +----------+----------+
-                    |
-               +----+----+
-               | Displays |
-               | 7 segs   |
-               +----------+
-```
+**resultado de la pruba**
+- sevseg: bcd=a => seg=0001000
+- sevseg: bcd=0 => seg=1000000
+- sevseg: bcd=2 => seg=0100100
+- sevseg: bcd=9 => seg=0010000
+---
 
 **Frecuencias típicas:**
 
@@ -296,24 +532,54 @@ De esta forma se lograron frecuencias adecuadas para el teclado y los displays.
 
 ---
 
-### 6.3 Verificación
+### 6.3  Análisis de Consumo de Recursos y Potencia
 
-**Niveles de simulación:**
 
-1. **Pre-síntesis (RTL):** Validación funcional mediante testbenches.
-2. **Post-síntesis:** Evaluación de temporización con retardos de compuerta.
-3. **Post-ruteo:** Confirmación de tiempos de setup/hold y estabilidad a 27 MHz.
 
-Se utilizó el **analizador lógico del DSO-X2002A** para verificar la respuesta temporal y detectar posibles glitches o violaciones de sincronización.
-El sistema completo presentó comportamiento estable y coherente con el modelo teórico.
+Frecuencia de operación: 27 MHz
+
+
+
+#### 6.3.1 Resultados de Síntesis 
+
+
+- Wires	803
+- Wire bits	1515
+- Celdas totales	946
+- Memorias	0
+- Bits de memoria	0
+- Procesos	0
+
+#### 6.3.2 Distribución de celdas principales:
+
+ALU: 134
+
+Flip-Flops (DFFC, DFFCE, DFFP): 90
+
+LUTs (1–4 entradas): 457
+
+Multiplexores (LUT5–LUT8): 242
+
+Buffers de E/S (IBUF/OBUF): 21
+
+
+
+#### 6.3.3 Utilización del Dispositivo 
+
+
+
+SLICEs	683	8640	7%
+IOB	21	274	7%
+MUX2_LUT5	156	4320	3%
+MUX2_LUT6	64	2160	2%
+MUX2_LUT7	18	1080	1%
+MUX2_LUT8	4	1056	0%
+RAMW (bloques de RAM)	0	270	0%
+rPLL / OSC / ODDR	0	—	0%
+
+El diseño ocupa únicamente el 7% de los recursos lógicos disponibles.
+
+
 
 ---
 
-## 7. Referencias
-
-1. Pong P. Chu, *FPGA Prototyping by SystemVerilog Examples*, Wiley, 2018.
-2. William J. Dally & R. C. Harting, *Digital Design: A Systems Approach*, Cambridge University Press, 2012.
-3. Keysight Technologies, *MSOX2002A Mixed Signal Oscilloscope Manual*.
-4. David Medina, *Flujo abierto para TangNano 9k*, 2024.
-
----
