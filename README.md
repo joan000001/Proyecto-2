@@ -534,12 +534,12 @@ endmodule
         $dumpvars(0, tb_teclado_matricial);
     end
 
-endmodule
+endmodule```
+```
+resultados
 
-###  resultados
 
-
-```systemverilog
+systemverilog
 
 [0] dig -> 000 | 000
 [3704000 ns] Reset desactivado - Sistema inicializado      
@@ -586,76 +586,9 @@ endmodule
 [525556275000] Presionando tecla '0'
 
 --- RESULTADO FINAL: Num1 = 012, Num2 = 377 --
-```
+
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ### 5.2 Subsistema de suma aritmética
 
