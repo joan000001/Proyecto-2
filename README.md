@@ -209,12 +209,11 @@ La arquitectura general sigue un enfoque de **flujo de datos controlado** median
 Lee datos del teclado hexadecimal 4x4, elimina rebotes y sincroniza las entradas.
 El teclado se analiza columna por columna usando un contador de anillo y detección de filas activas.
 
-**FSM principal:**
 
-* *IDLE → DETECT → DEBOUNCE → STORE → SWITCH*
-  Permite registrar los dos números consecutivos antes de activar la suma.
 
   **Diseño**
+
+  
 ```systemverilog
 module teclado_matricial (
     input  logic        clk,
@@ -537,7 +536,9 @@ endmodule
 
 endmodule
 
-####  resultados
+###  resultados
+
+
 ```systemverilog
 
 [0] dig -> 000 | 000
@@ -584,17 +585,77 @@ endmodule
 [485552272000] Presionando tecla '0'
 [525556275000] Presionando tecla '0'
 
---- RESULTADO FINAL: Num1 = 012, Num2 = 377 ---
-
-  F PRUEBA DE L├ìMITE (M├ís de 6 dig)
-[585562280000] Presionando tecla '*'
-[636067334000] Presionando tecla '1'
-[637919308000] dig -> 000 | 000
-[676071337000] Presionando tecla '2'
-ERROR: Timeout alcanzado!
+--- RESULTADO FINAL: Num1 = 012, Num2 = 377 --
 ```
 
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### 5.2 Subsistema de suma aritmética
 
@@ -720,13 +781,13 @@ endmodule
 ```
 
 **resultado de la pruba**
-SUMA BCD 
-   Numero1   +   Numero2   =   Resultado
-     123   +   466   =   0589
-     999   +   111   =   1110
-     567   +   678   =   1245
-     280   +   250   =   0530
-     400   +   700   =   1100
+- SUMA BCD
+-   Numero1   +   Numero2   =   Resultado
+    - 123   +   466   =   0589
+    - 999   +   111   =   1110
+    - 567   +   678   =   1245
+    - 280   +   250   =   0530
+   -  400   +   700   =   1100
 
 ---
 
@@ -800,6 +861,44 @@ end
 endmodule
 
 ```
+
+### 5.4 Decodificaor del 7 segmentos
+
+**Descripción:**
+Convierte los datos binarios a formato decimal BCD y los muestra en cuatro displays de 7 segmentos con cátodos comunes.
+
+**Etapas funcionales:**
+
+1. Conversión binario–BCD.
+2. Decodificación BCD–7 segmentos.
+3. Multiplexado y refresco secuencial de displays.
+
+**Test**
+```systemverilog
+   bcd_val = 4'hA; 
+        #1;
+        $display("sevseg: bcd=%h => seg=%b", bcd_val, seg_out);
+        bcd_val = 4'h0; 
+        #1;
+        $display("sevseg: bcd=%h => seg=%b", bcd_val, seg_out);
+        bcd_val = 4'h2; 
+        #1;
+        $display("sevseg: bcd=%h => seg=%b", bcd_val, seg_out);
+        bcd_val = 4'h9; 
+        #1;
+        $display("sevseg: bcd=%h => seg=%b", bcd_val, seg_out);
+        
+```
+
+**resultado de la pruba**
+- sevseg: bcd=a => seg=0001000
+- sevseg: bcd=0 => seg=1000000
+- sevseg: bcd=2 => seg=0100100
+- sevseg: bcd=9 => seg=0010000
+
+
+---
+
 ### 5.5 TOP
 
 
@@ -893,145 +992,16 @@ module top (
 endmodule
 ```
 
-
-**Sincronización:**
-Las señales de entrada fueron registradas doblemente para evitar metastabilidad y sincronizadas al reloj interno de 27 MHz.
+## 6. Análisis de Consumo de Recursos y Potencia
 
 ---
-
-**Etapas funcionales:**
-
-1. Conversión binario–BCD.
-2. Decodificación BCD–7 segmentos.
-3. Multiplexado y refresco secuencial de displays.
-
-**Test**
-```systemverilog
-          always #(CLK_PERIOD/2.0) clk = ~clk;
-
-          // Proceso inicial
-          initial begin
-              
-              $display("Tiempo(us)\tsegmento_activo\tbcd_value\tDígito activo");
-              clk = 0;
-              rst_n = 0;
-              digito1 = 4'd1;
-              digito2 = 4'd2;
-              digito3 = 4'd9;
-              digito4 = 4'd4;
-
-              #1000;    // Esperar 10 µs
-              rst_n = 1;
-
-              
-              repeat (9000) begin
-                  @(posedge clk);
-                  if (dut.contador == 0) begin
-                      string digito_activo;
-                      case (segmento_activo)
-                          4'b0001: digito_activo = "unidad";
-                          4'b0010: digito_activo = "decena";
-                          4'b0100: digito_activo = "centena";
-                          4'b1000: digito_activo = "millar";
-                          default: digito_activo = "N/A";
-                      endcase
-
-                      $display("%0t\t%b\t\t%d\t\t%s",
-                              $time, segmento_activo, bcd_value, digito_activo);
-     
-```
-
-**resultado de la pruba**
-Tiempo(us)      segmento_activo bcd_value       Digito activo
-1001000000000000        0001             1              unidad
-3003000000000000        0010             2              decena
-5005000000000000        0100             9              centena
-7007000000000000        1000             4              millar
-9009000000000000        0001             1              unidad
-11011000000000000       0010             2              decena
-13013000000000000       0100             9              centena
-15015000000000000       1000             4              millar
-17017000000000000       0001             1              unidad
-../sim/tech_tb.sv:62: $finish called at 18999000000000000 (1ps)
-
----
-
-### 5.3 Decodificaor del 7 segmentos
-
-**Descripción:**
-Convierte los datos binarios a formato decimal BCD y los muestra en cuatro displays de 7 segmentos con cátodos comunes.
-
-**Etapas funcionales:**
-
-1. Conversión binario–BCD.
-2. Decodificación BCD–7 segmentos.
-3. Multiplexado y refresco secuencial de displays.
-
-**Test**
-```systemverilog
-   bcd_val = 4'hA; 
-        #1;
-        $display("sevseg: bcd=%h => seg=%b", bcd_val, seg_out);
-        bcd_val = 4'h0; 
-        #1;
-        $display("sevseg: bcd=%h => seg=%b", bcd_val, seg_out);
-        bcd_val = 4'h2; 
-        #1;
-        $display("sevseg: bcd=%h => seg=%b", bcd_val, seg_out);
-        bcd_val = 4'h9; 
-        #1;
-        $display("sevseg: bcd=%h => seg=%b", bcd_val, seg_out);
-        
-```
-
-**resultado de la pruba**
-- sevseg: bcd=a => seg=0001000
-- sevseg: bcd=0 => seg=1000000
-- sevseg: bcd=2 => seg=0100100
-- sevseg: bcd=9 => seg=0010000
-
-
----
-
-## 6. Guía de diseño
-
-### 6.1 Codificación del HDL
-
-* Lenguaje utilizado: **SystemVerilog**.
-* Se aplicó un estilo jerárquico y estructurado.
-* Separación clara entre lógica combinacional (`always_comb`) y secuencial (`always_ff`).
-* FSM codificadas con enumeraciones para legibilidad:
-
-```systemverilog
-typedef enum logic [2:0] {IDLE, DETECT, DEBOUNCE, STORE, SWITCH} state_t;
-```
-
-* Señales y módulos con nombres descriptivos y normalización de prefijos.
-
----
-
-### 6.2 Sincronización
-
-Todas las señales externas se sincronizaron al reloj interno de **27 MHz** mediante registros dobles para evitar metastabilidad.
-Cada subsistema está registrado a la **entrada y salida**, garantizando coherencia temporal.
-
-Se emplearon divisores de frecuencia para adaptar las tasas de operación:
-[
-f_{salida} = \frac{f_{reloj}}{2^N}
-]
-De esta forma se lograron frecuencias adecuadas para el teclado y los displays.
-
----
-
-### 6.3  Análisis de Consumo de Recursos y Potencia
-
 
 
 Frecuencia de operación: 27 MHz
 
 
 
-#### 6.3.1 Resultados de Síntesis 
+#### 6.1 Resultados de Síntesis 
 
 
 - Wires	803
@@ -1041,7 +1011,7 @@ Frecuencia de operación: 27 MHz
 - Bits de memoria	0
 - Procesos	0
 
-#### 6.3.2 Distribución de celdas principales:
+#### 6.2 Distribución de celdas principales:
 
 - ALU: 134
 
@@ -1055,7 +1025,7 @@ Frecuencia de operación: 27 MHz
 
 
 
-#### 6.3.3 Utilización del Dispositivo 
+#### 6.3 Utilización del Dispositivo 
 
 
 
@@ -1070,7 +1040,7 @@ Frecuencia de operación: 27 MHz
 
 El diseño ocupa únicamente el 7% de los recursos lógicos disponibles.
 
-### 6.4  Análisis de Consumo de Recursos y Potencia
+## 7 Problemas
 
 Durante la realización de este proyecto se presentaron dos problemas principales.
 El primero estuvo relacionado con las conexiones físicas a la FPGA, ya que se utilizaron pines incorrectos o no adecuados para los niveles de voltaje y la lógica empleada en el escaneo del teclado.
