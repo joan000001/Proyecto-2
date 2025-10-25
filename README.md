@@ -589,8 +589,13 @@ endmodule
 
 
 **Descripción:**
-En esta seccion es donde
+En esta seccion es donde se hara el llamado a los modulos inferiores, para su operacion requeriremos las variables generales del clock (clk) y del reset (rst_n), las variables de columnas (columnas) y filas (filas) que se utilizan para la captura de entradas en el teclado, la variable de segmentos (segments) para la escogencia de las secciones de los 7 segmentos que se utilizaran como display, y una variable de control de los 7 segmentos (enable_displays).
+Tambien se utilizan variables intermas para el almacenamiento de los digitos recibidos del teclado (dig1_1, dig1_2, dig1_3, dig2_1, dig2_2, dig2_3) y tambien otras para el almacenamiento de los digitos resultantes de la suma (digito1, digito2, digito3, digito4).
 
+Lo primero que se hara sera un llamado al modulo encargado de la captura de los 2 numeros de 3 digitos, con el cual se guardaran los datos en las variables "dig#_#" correspondientes segun el numero al que correspondan y su pocicion.
+Seguidamente se llamara al modulo encargado de la suma, donde se utilizaran las variables "dig#_#" y se realizaaran las sumas secuenciales correspondientes, considerando la pisicion de los numeros y los carrys que surgan de una posicion a la otra. Los resultados se guardaran en las variables "digito#" para poder ser utilizadas seguidamente.
+Estas variables "digito#" seran enviadas al siguiente modulo, el modulo encargado del multiplexor, en el cual cada "digito#" se tranforma en una señal que pueda ser interpretada por el modulo encargado del display de los 7 segmentos.
+Por ultimo en modulo decodificador toma las señales de salida del modulo anterior y las interpreta en la secuencia de encendidos y apagados de los display de 7 segmentos para que se muestre el resultado de la suma.
 
 
   **Diseño**
