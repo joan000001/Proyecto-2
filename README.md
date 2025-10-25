@@ -846,7 +846,15 @@ Frecuencia de operación: 27 MHz
 
 El diseño ocupa únicamente el 7% de los recursos lógicos disponibles.
 
+### 6.4  Análisis de Consumo de Recursos y Potencia
 
+Durante la realización de este proyecto se presentaron dos problemas principales.
+El primero estuvo relacionado con las conexiones físicas a la FPGA, ya que se utilizaron pines incorrectos o no adecuados para los niveles de voltaje y la lógica empleada en el escaneo del teclado.
+
+
+El segundo, y más relevante, fue el relacionado con el circuito de antirrebote, el cual representó el mayor desafío durante la programación. No se logró obtener un comportamiento estable con las distintas versiones de antirrebote implementadas. Además, la limitada comprensión inicial del funcionamiento de estos módulos dificultó su modificación y adaptación a las necesidades específicas del diseño.
+
+Como resultado, este factor se convirtió en una de las principales causas por las cuales el circuito no funcionó de manera adecuada.
 
 ---
 
