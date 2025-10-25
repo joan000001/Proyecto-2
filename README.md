@@ -568,14 +568,14 @@ Buffers de E/S (IBUF/OBUF): 21
 
 
 
-SLICEs	683	8640	7%
-IOB	21	274	7%
-MUX2_LUT5	156	4320	3%
-MUX2_LUT6	64	2160	2%
-MUX2_LUT7	18	1080	1%
-MUX2_LUT8	4	1056	0%
-RAMW (bloques de RAM)	0	270	0%
-rPLL / OSC / ODDR	0	—	0%
+- SLICEs	683	8640	7%
+- IOB	21	274	7%
+- MUX2_LUT5	156	4320	3%
+- MUX2_LUT6	64	2160	2%
+- MUX2_LUT7	18	1080	1%
+- MUX2_LUT8	4	1056	0%
+- RAMW (bloques de RAM)	0	270	0%
+ -rPLL / OSC / ODDR	0	—	0%
 
 El diseño ocupa únicamente el 7% de los recursos lógicos disponibles.
 
