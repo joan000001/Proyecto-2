@@ -589,7 +589,13 @@ ERROR: Timeout alcanzado!
 ### 5.2 Subsistema de suma aritmética
 
 **Descripción:**
-Recibe los dos números capturados y realiza la suma sin signo de manera sincrónica.
+El módulo suma es un bloque combinacional diseñado para realizar la suma aritmética entre dos números decimales de tres dígitos, representados en formato BCD (Binary Coded Decimal). Cada número se ingresa dividido en tres grupos de cuatro bits, que corresponden a las posiciones de unidades, decenas y centenas.
+
+El funcionamiento del módulo se basa en aplicar la lógica de la suma decimal corregida por cada dígito, de manera muy similar a como se haría una suma manual en papel, pero implementada digitalmente. En primer lugar, el bloque suma las unidades de ambos números. Si el resultado supera el valor decimal 9, se agrega una corrección de 6 en binario (equivalente a 0110₂) para volver a un resultado válido en BCD. El dígito resultante se almacena como salida de unidades (digito1), mientras que el bit de acarreo que produce la operación se guarda en una variable intermedia (car1).
+
+A continuación, el módulo realiza la suma de las decenas, que incluye los dos dígitos correspondientes de entrada más el acarreo proveniente de las unidades. Si esta suma también excede el valor 9, se aplica la misma corrección BCD y se obtiene el segundo dígito del resultado (digito2) junto con un nuevo acarreo (car2).
+
+El proceso se repite finalmente para las centenas, sumando los dos dígitos más el acarreo anterior. Si el valor es mayor que 9, se corrige nuevamente y se generan los dígitos de centenas (digito3) y el de millares (digito4), este último en caso de existir un acarreo final.
 
 **Diseño**
 
@@ -717,7 +723,15 @@ SUMA BCD
 ### 5.3 Subsistema de despliegue en 7 segmentos
 
 **Descripción:**
-Recibe los dos números capturados y realiza la suma sin signo de manera sincrónica.
+El módulo multiplex_display es un componente digital encargado de controlar el encendido secuencial de cuatro displays de 7 segmentos mediante una técnica conocida como multiplexado dinámico. Su propósito es mostrar de forma continua los cuatro dígitos de un número, utilizando un número reducido de pines de salida de la FPGA.
+
+El funcionamiento del módulo se basa en activar cada display uno por uno, muy rápidamente, de modo que solo un display se encuentra encendido en un instante dado. Sin embargo, gracias a la persistencia de la visión humana, el observador percibe que todos los displays están encendidos simultáneamente. Este principio permite optimizar el uso de hardware, ya que los cuatro dígitos comparten las mismas líneas de datos que representan el número a mostrar.
+
+En el interior del módulo se define un contador principal que incrementa con cada ciclo de reloj. Cuando dicho contador alcanza el valor establecido por el parámetro contar, se reinicia y provoca que cambie el display activo. Para llevar el control de cuál display se encuentra encendido en cada momento, se utiliza una variable de dos bits llamada pantalla_activa, la cual recorre los valores de 0 a 3, correspondientes a los cuatro displays del sistema.
+
+En cada iteración, según el valor de pantalla_activa, se selecciona cuál de los cuatro dígitos de entrada (digito1, digito2, digito3 o digito4) será enviado a la salida bcd_value. Este valor representa el número BCD que debe mostrarse en ese instante. Simultáneamente, el módulo genera una señal de control llamada segmento_activo, que activa únicamente el display correspondiente al dígito seleccionado. Esta señal se codifica de forma one-hot, lo que significa que solo un bit de los cuatro está en alto en cada momento (por ejemplo, 0001 para el primer display, 0010 para el segundo, etc.).
+
+De esta manera, el módulo alterna constantemente entre los cuatro displays, encendiendo cada uno por un tiempo muy corto y mostrando en él su dígito respectivo. Si la frecuencia de cambio es suficientemente alta —normalmente superior a 60 Hz—, el ojo humano no percibe el parpadeo y el resultado visual es una imagen estable de cuatro dígitos encendidos simultáneamente.
 
 **Diseño**
 
@@ -780,13 +794,17 @@ endmodule
 
 
 **Descripción:**
-En esta seccion es donde se hara el llamado a los modulos inferiores, para su operacion requeriremos las variables generales del clock (clk) y del reset (rst_n), las variables de columnas (columnas) y filas (filas) que se utilizan para la captura de entradas en el teclado, la variable de segmentos (segments) para la escogencia de las secciones de los 7 segmentos que se utilizaran como display, y una variable de control de los 7 segmentos (enable_displays).
-Tambien se utilizan variables intermas para el almacenamiento de los digitos recibidos del teclado (dig1_1, dig1_2, dig1_3, dig2_1, dig2_2, dig2_3) y tambien otras para el almacenamiento de los digitos resultantes de la suma (digito1, digito2, digito3, digito4).
+El módulo top representa el nivel superior del sistema completo, encargado de integrar y coordinar todos los subsistemas del proyecto: la lectura del teclado, la suma de los números, el control del despliegue y la decodificación hacia los displays de 7 segmentos. Es, por tanto, el núcleo funcional que conecta los distintos bloques lógicos y define el flujo general de datos desde la entrada hasta la salida visible.
 
-Lo primero que se hara sera un llamado al modulo encargado de la captura de los 2 numeros de 3 digitos, con el cual se guardaran los datos en las variables "dig#_#" correspondientes segun el numero al que correspondan y su pocicion.
-Seguidamente se llamara al modulo encargado de la suma, donde se utilizaran las variables "dig#_#" y se realizaaran las sumas secuenciales correspondientes, considerando la pisicion de los numeros y los carrys que surgan de una posicion a la otra. Los resultados se guardaran en las variables "digito#" para poder ser utilizadas seguidamente.
-Estas variables "digito#" seran enviadas al siguiente modulo, el modulo encargado del multiplexor, en el cual cada "digito#" se tranforma en una señal que pueda ser interpretada por el modulo encargado del display de los 7 segmentos.
-Por ultimo en modulo decodificador toma las señales de salida del modulo anterior y las interpreta en la secuencia de encendidos y apagados de los display de 7 segmentos para que se muestre el resultado de la suma.
+El módulo comienza recibiendo las señales externas: un reloj (clk), una señal de reinicio activo en bajo (rst_n), las entradas del teclado matricial (columnas) y las salidas hacia los cuatro displays (las líneas segments y enable_displays). A partir de estas señales se definen varias líneas internas de interconexión que permitirán el paso de información entre los submódulos.
+
+En primer lugar, se instancia el módulo teclado_matricial, el cual se encarga de leer el estado del teclado hexadecimal de 4x4. Este bloque detecta qué tecla ha sido presionada, elimina los posibles rebotes eléctricos y entrega seis salidas en formato BCD: tres dígitos correspondientes al primer número (dig1_1, dig1_2, dig1_3) y tres al segundo número (dig2_1, dig2_2, dig2_3). De esta manera, el sistema obtiene dos números de tres cifras decimales listos para ser procesados.
+
+El siguiente submódulo, suma, recibe estos dos grupos de dígitos y realiza la operación aritmética decimal. El resultado se produce también en formato BCD, distribuido en cuatro salidas (digito1 a digito4), que representan respectivamente las unidades, decenas, centenas y millares del número resultante. Este bloque ejecuta internamente la corrección BCD para garantizar que cada dígito del resultado permanezca dentro del rango válido (0–9).
+
+A continuación, el módulo multiplex_display toma los cuatro dígitos obtenidos y los envía a los displays de 7 segmentos mediante un proceso de multiplexado temporal. Este submódulo se encarga de encender cada display de forma secuencial a gran velocidad, seleccionando el valor correspondiente a cada uno y activando la señal enable_displays que determina cuál de los cuatro está iluminado en cada instante. Al mismo tiempo, entrega en su salida bcd_value el dígito que debe mostrarse.
+
+Finalmente, el módulo sevseg actúa como decodificador BCD–7 segmentos, recibiendo el valor BCD y generando en la salida segments las combinaciones de bits necesarias para iluminar los LEDs correspondientes al número decimal que se desea mostrar.
 
 
   **Diseño**
