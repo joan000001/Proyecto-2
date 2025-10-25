@@ -16,7 +16,8 @@
 - [2] B. Razavi, Design of Analog CMOS Integrated Circuits, 2nd ed. New York, NY, USA: McGraw-Hill Education, 2016.
 
 ### 3. Desarrollo
- - Joan Franco Sandoval 
+ - Joan Franco Sandoval
+ - Alexander Mesen Vargas
 
 ---
 
@@ -62,6 +63,8 @@ Ambos segun el instructivo comparten la señal de reloj, sin embargo, usando la 
 Por lo que tambien se utilizaron frecuencias mas bajas con ayuda de un generador de funciones y modificando un poco el circuito con LEDs.
 La salida **RCO** del primer contador (carry out) habilita el **ENT** del segundo (carry in), asegurando que este incremente solo cuando el primero completa su ciclo (de 0000₂ a 1111₂).
 
+""""""""""""""""""""""""""""""""""""""(Video de circuito 1)""""""""""""""""""""""""""""""""""""""""""""""
+
 **Señales principales:**
 
 * **RCO (Ripple Carry Output):** se activa al llegar al valor máximo (1111₂).
@@ -75,6 +78,9 @@ Los flip-flops internos cambian casi simultáneamente tras el flanco del reloj, 
 
 **Fallas observadas:**
 En modo de captura de falla del osiloscopio se detectaron pulsos muy breves en RCO, debidos a diferencias mínimas de propagación entre flip-flops.
+
+""""""""""""""""""""""""""""""""""""""(Circuito contador con puntas para capturar fallas.jpeg)""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""(Captura de fallas en el osciloscopio.jpeg)""""""""""""""""""""""""""""""""""""""""""""""
 
 **Forma de onda esperada:**
 
@@ -92,6 +98,8 @@ RCO:   __________‾________
 
 Se implementó un **cerrojo SR positivo** utilizando el circuito integrado **74HC00** (cuatro compuertas NAND de dos entradas).
 El diseño se sincronizó mediante una señal de reloj proveniente de la FPGA y tambien frecuencias mas bajas con ayuda de un generador de funciones, de modo que el cerrojo solo responde cuando **CLK=1**.
+
+""""""""""""""""""""""""""""""""""""""(Circuito cerrojo.jpeg)""""""""""""""""""""""""""""""""""""""""""""""
 
 **Principio de funcionamiento:**
 
