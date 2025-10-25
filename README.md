@@ -390,7 +390,7 @@ endmodule
 ![image Alt]()
 ```
 
-**Test**
+#### **Test**
 ```systemverilog
    
     initial begin
@@ -513,6 +513,8 @@ endmodule
     end
 
 endmodule
+
+#### resultados
 ```systemverilog
 
 [0] dig -> 000 | 000
@@ -566,10 +568,8 @@ endmodule
 [636067334000] Presionando tecla '1'
 [637919308000] dig -> 000 | 000
 [676071337000] Presionando tecla '2'
-
-Ô£ù ERROR: Timeout alcanzado!
-
----
+ERROR: Timeout alcanzado!
+```
 
 ---
 
