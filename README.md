@@ -390,8 +390,186 @@ endmodule
 ![image Alt]()
 ```
 
-**Sincronización:**
-Las señales de entrada fueron registradas doblemente para evitar metastabilidad y sincronizadas al reloj interno de 27 MHz.
+**Test**
+```systemverilog
+   
+    initial begin
+     
+        
+        // Configuración inicial
+        columnas = 4'b0000;
+        rst_n = 0;
+        
+        // Reset
+        
+        $display("   RESET  DEL ESCANEO DE FILAS");
+        
+        
+        #(100 * CLK_PERIOD);
+        rst_n = 1;
+        $display("[%0t ns] Reset desactivado - Sistema inicializado\n", $time);
+        
+        // Observar varios ciclos de escaneo
+        $display("--- Observando 2 ciclos completos de escaneo de filas ---\n");
+        #(SCAN_TIME * 8); // 2 ciclos completos (4 filas x 2)
+        
+        // ====== TEST 1: Ingresar número 123456 ======
+        
+        $display("  INGRESO DE NUMERO COMPLETO (123456)");
+        
+        
+        pulsar_tecla(0, 0, 30); // Tecla 1
+        $display("    Esperado: Primer dig = 1 (Centena Num1)\n");
+        
+        pulsar_tecla(0, 1, 30); // Tecla 2
+        $display("    Esperado: Segundo dig = 2 (Decena Num1)\n");
+        
+        pulsar_tecla(0, 2, 30); // Tecla 3
+        $display("    Esperado: Tercer dig = 3 (Unidad Num1)\n");
+        
+        pulsar_tecla(1, 0, 30); // Tecla 4
+        $display("    Esperado: Cuarto dig = 4 (Centena Num2)\n");
+        
+        pulsar_tecla(1, 1, 30); // Tecla 5
+        $display("    Esperado: Quinto dig = 5 (Decena Num2)\n");
+        
+        pulsar_tecla(1, 2, 30); // Tecla 6
+        $display("    Esperado: Sexto dig = 6 (Unidad Num2)\n");
+        
+        #(20 * 1000000); // Esperar 20ms
+        
+        $display("\n--- RESULTADO FINAL: Num1 = %0d%0d%0d, Num2 = %0d%0d%0d ---\n", 
+                 dig1_3, dig1_2, dig1_1, dig2_3, dig2_2, dig2_1);
+        
+        // ====== TEST 2: Probar tecla de borrado (*) ======
+        
+        $display("  PRUEBA DE BORRADO (Tecla *)");
+        
+        
+        pulsar_tecla(3, 0, 30); // Tecla * (borrar)
+        $display("    Esperado: Todos los dig en 0\n");
+        
+        #(20 * 1000000);
+        
+        // ====== TEST 3: Ingresar otro número ======
+        
+        $display("  NUEVO INGRESO (789000)");
+        
+        
+        pulsar_tecla(2, 0, 30); // Tecla 7
+        pulsar_tecla(2, 1, 30); // Tecla 8
+        pulsar_tecla(2, 2, 30); // Tecla 9
+        pulsar_tecla(3, 1, 30); // Tecla 0
+        pulsar_tecla(3, 1, 30); // Tecla 0
+        pulsar_tecla(3, 1, 30); // Tecla 0
+        
+        #(20 * 1000000);
+        
+        $display("\n--- RESULTADO FINAL: Num1 = %0d%0d%0d, Num2 = %0d%0d%0d ---\n", 
+                 dig1_3, dig1_2, dig1_1, dig2_3, dig2_2, dig2_1);
+      
+      
+        $display("  F PRUEBA DE LÍMITE (Más de 6 dig)");
+   
+        
+        pulsar_tecla(3, 0, 30); // Borrar
+        #(10 * 1000000);
+        
+        // Ingresar 6 dig
+        pulsar_tecla(0, 0, 30); // 1
+        pulsar_tecla(0, 1, 30); // 2
+        pulsar_tecla(0, 2, 30); // 3
+        pulsar_tecla(1, 0, 30); // 4
+        pulsar_tecla(1, 1, 30); // 5
+        pulsar_tecla(1, 2, 30); // 6
+        
+        // Intentar ingresar un 7mo dig
+        $display(">>> Intentando ingresar 7mo dig (debe ignorarse) <<<\n");
+        pulsar_tecla(2, 0, 30); // Tecla 7 (debe ignorarse)
+        
+        if (dig2_1 == 4'd6)
+            $display("✓ CORRECTO: 7mo dig ignorado, último dig sigue siendo 6\n");
+        else
+            $display("✗ ERROR: 7mo dig fue procesado\n");
+        
+        // ====== Resumen final ======
+        #(50 * 1000000);
+        
+        
+        $finish;
+    end
+    
+    // ====== Timeout de seguridad ======
+    initial begin
+        #(5000 * 1000000); // 5 segundos timeout
+        $display("\n✗ ERROR: Timeout alcanzado!\n");
+        $finish;
+    end
+    
+    // ====== Generación de archivo VCD para visualización ======
+    initial begin
+        $dumpfile("teclado_matricial.vcd");
+        $dumpvars(0, tb_teclado_matricial);
+    end
+
+endmodule
+```
+
+[0] dig -> 000 | 000
+[3704000 ns] Reset desactivado - Sistema inicializado      
+
+--- Observando 2 ciclos completos de escaneo de filas ---  
+
+  INGRESO DE NUMERO COMPLETO (123456)
+[4004086000] Presionando tecla '1'   
+    Esperado: Primer dig = 1 (Centena Num1)
+
+[44008089000] Presionando tecla '2'        
+    Esperado: Segundo dig = 2 (Decena Num1)
+
+[84012092000] Presionando tecla '3'
+    Esperado: Tercer dig = 3 (Unidad Num1)
+
+[124516145000] Presionando tecla '4'
+[126368119000] dig -> 010 | 000
+    Esperado: Cuarto dig = 4 (Centena Num2)
+
+[164520148000] Presionando tecla '5'
+[166372122000] dig -> 012 | 000
+    Esperado: Quinto dig = 5 (Decena Num2)
+
+[204524151000] Presionando tecla '6'
+[206376125000] dig -> 012 | 300
+    Esperado: Sexto dig = 6 (Unidad Num2)
+
+
+--- RESULTADO FINAL: Num1 = 012, Num2 = 300 ---
+
+  PRUEBA DE BORRADO (Tecla *)
+[265530255000] Presionando tecla '*'
+[267382230000] dig -> 012 | 370
+    Esperado: Todos los dig en 0
+
+  NUEVO INGRESO (789000)
+[325530255000] Presionando tecla '7'
+[327382197000] dig -> 012 | 377
+[365530255000] Presionando tecla '8'
+[405530255000] Presionando tecla '9'
+[445548269000] Presionando tecla '0'
+[485552272000] Presionando tecla '0'
+[525556275000] Presionando tecla '0'
+
+--- RESULTADO FINAL: Num1 = 012, Num2 = 377 ---
+
+  F PRUEBA DE L├ìMITE (M├ís de 6 dig)
+[585562280000] Presionando tecla '*'
+[636067334000] Presionando tecla '1'
+[637919308000] dig -> 000 | 000
+[676071337000] Presionando tecla '2'
+
+Ô£ù ERROR: Timeout alcanzado!
+
+---
 
 ---
 
